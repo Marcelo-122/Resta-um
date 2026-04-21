@@ -1,36 +1,23 @@
+/* Integrantes: Marcelo Fernandes de Oliveira Junior */
 #include <stdio.h>
-
-#define TAMANHO 7
-#define PINO     1
-#define VAZIO    0
-#define INVALIDO -1
-
-int tabuleiro[TAMANHO][TAMANHO] = {
-    {-1, -1,  1,  1,  1, -1, -1},
-    {-1, -1,  1,  1,  1, -1, -1},
-    { 1,  1,  1,  1,  1,  1,  1},
-    { 1,  1,  1,  0,  1,  1,  1},  // centro vazio
-    { 1,  1,  1,  1,  1,  1,  1},
-    {-1, -1,  1,  1,  1, -1, -1},
-    {-1, -1,  1,  1,  1, -1, -1}
-};
-
-// Imprime o tabuleiro no terminal
-void imprimirTabuleiro() {
-    for (int i = 0; i < TAMANHO; i++) {
-        for (int j = 0; j < TAMANHO; j++) {
-            if (tabuleiro[i][j] == INVALIDO)
-                printf("  ");       // espaço para posições inválidas
-            else if (tabuleiro[i][j] == PINO)
-                printf("● ");       // pino
-            else
-                printf("○ ");       // vazio
-        }
-        printf("\n");
-    }
-}
+#include "tabuleiro.h"
+#include "movimento.h"
+ 
+// gcc -Wall -o restaum main.c tabuleiro.c movimento.c <---- compilacao
 
 int main() {
+    printf("=== RESTA UM - Solucao por Backtracking ===\n\n");
+ 
+    printf("Tabuleiro inicial:\n\n");
     imprimirTabuleiro();
+ 
+    printf("Buscando solucao, aguarde...\n\n");
+ 
+    if (resolver(0)) {
+        imprimirTabuleiro(); /* tabuleiro final (so o centro preenchido) */
+    } else {
+        printf("\nNenhuma solucao encontrada.\n");
+    }
+ 
     return 0;
 }
